@@ -1,0 +1,8 @@
+com\bintang\clientbintang\Clientbintang.class
+com\bintang\clientbintang\controller\AnggotaController.class
+com\bintang\clientbintang\FormAnggota.class
+com\bintang\clientbintang\model\Anggota.class
+com\bintang\clientbintang\service\AnggotaService.class
+com\bintang\clientbintang\FormAnggota$3.class
+com\bintang\clientbintang\FormAnggota$1.class
+com\bintang\clientbintang\FormAnggota$2.class

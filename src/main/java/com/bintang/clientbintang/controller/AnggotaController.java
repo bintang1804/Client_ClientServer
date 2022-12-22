@@ -7,45 +7,82 @@ package com.bintang.clientbintang.controller;
 import com.bintang.clientbintang.FormAnggota;
 import com.bintang.clientbintang.model.Anggota;
 import com.bintang.clientbintang.service.AnggotaService;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author bintang
  */
 public class AnggotaController {
-    private AnggotaService anggotaService;
+
+    private final AnggotaService anggotaService;
     private final FormAnggota formAnggota;
 
     public AnggotaController(FormAnggota formAnggota) {
         this.formAnggota = formAnggota;
         anggotaService = new AnggotaService();
     }
-    
-    
-    public void bersihForm(){
+
+    public void bersihForm() {
         formAnggota.getTxtIdAnggota().setText("");
         formAnggota.getTxtNama().setText("");
         formAnggota.getTxtAlamat().setText("");
     }
-    
-    public Anggota saveAnggota(){
+
+    public Anggota saveAnggota() {
         Anggota anggota = new Anggota();
         anggota.setNama(formAnggota.getTxtNama().getText());
         anggota.setAlamat(formAnggota.getTxtAlamat().getText());
         return anggotaService.saveAnggota(anggota);
     }
-    
-    public Anggota getAnggotaId(){
-        Long id = Long.parseLong(formAnggota.getTxtIdAnggota().getText());
+
+    public Anggota getAnggotaId() {
+        Long id = Long.valueOf(formAnggota.getTxtIdAnggota().getText());
         Anggota anggota = anggotaService.getAnggota(id);
-        if(anggota!=null){
+        if (anggota != null) {
             formAnggota.getTxtNama().setText(anggota.getNama());
             formAnggota.getTxtAlamat().setText(anggota.getAlamat());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(formAnggota, "Data tidak ada");
         }
         return anggota;
     }
-    
+
+    public void updateAnggota() {
+        Anggota anggota = new Anggota();
+        anggota.setAnggotaId(Long.valueOf(formAnggota.getTxtIdAnggota().getText()));
+        anggota.setNama(formAnggota.getTxtNama().getText());
+        anggota.setAlamat(formAnggota.getTxtAlamat().getText());
+        anggota = anggotaService.updateAnggota(anggota);
+        if (anggota != null) {
+            formAnggota.getTxtIdAnggota().setText(anggota.getAnggotaId().toString());
+            JOptionPane.showMessageDialog(formAnggota, "Update Data Berhasil");
+        } else {
+            JOptionPane.showMessageDialog(formAnggota, "Update Data Gagal");
+        }
+    }
+
+    public void deleteAnggota() {
+        Long id = Long.valueOf(formAnggota.getTxtIdAnggota().getText());
+        anggotaService.deleteAnggota(id);
+        JOptionPane.showMessageDialog(formAnggota, "Delete Data Berhasil");
+    }
+
+    public void viewTabel() {
+        DefaultTableModel tabelModel = (DefaultTableModel) formAnggota.getTabel().getModel();
+        tabelModel.setRowCount(0);
+        List<Anggota> anggotaList = anggotaService.getAllAnggota();
+        for (Anggota anggota : anggotaList) {
+            Object[] row = {
+                anggota.getAnggotaId(),
+                anggota.getNama(),
+                anggota.getAlamat()
+            };
+            tabelModel.addRow(row);
+        }
+    }
+
+
 }

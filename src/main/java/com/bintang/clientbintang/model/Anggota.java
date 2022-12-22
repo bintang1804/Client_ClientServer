@@ -6,7 +6,7 @@ package com.bintang.clientbintang.model;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author bintang
  */
 public class Anggota {
     private Long anggotaId;
