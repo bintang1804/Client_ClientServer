@@ -9,7 +9,8 @@ package com.bintang.clientbintang.model;
  * @author bintang
  */
 public class Anggota {
-     private Long anggotaId;
+
+    private Long anggotaId;
     private String nama;
     private String alamat;
 
