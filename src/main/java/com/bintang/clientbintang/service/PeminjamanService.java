@@ -22,15 +22,21 @@ public class PeminjamanService {
 
     private final String URL = "http://localhost:8050";
 //
-//    public Peminjaman getPeminjaman(Long peminjamanId) {
-//        Peminjaman peminjaman = Unirest.get(URL + "/peminjaman/" + peminjamanId).asObject(Peminjaman.class).getBody();
-//        if (peminjaman != null) {
-//            return peminjaman;
-//        }
-//
-//        return peminjaman;
-//    }
-//
+
+    public Peminjaman getPeminjaman(Long peminjamanId) {
+        Peminjaman peminjaman = Unirest.get(URL + "/peminjaman/" + peminjamanId).
+                asObject(Peminjaman.class).
+                getBody();
+        if (peminjaman != null) {
+            return peminjaman;
+        }
+
+        return peminjaman;
+    }
+
+
+    
+
     public List<Peminjaman> getAllPeminjaman() {
         List<Peminjaman> peminjamanList = Unirest.get(URL + "/peminjaman/")
                 .asObject(new GenericType<List<Peminjaman>>() {
@@ -38,43 +44,21 @@ public class PeminjamanService {
                 .getBody();
         return peminjamanList;
     }
-//
-//    public Peminjaman savePeminjaman(Peminjaman peminjaman) {
-//        HttpResponse<JsonNode> response = Unirest.post(URL + "/peminjaman/")
-//                .header("content-type", "application/json")
-//                .body(peminjaman)
-//                .asJson();
-//        Gson gson = new Gson();
-//        Peminjaman p = gson.fromJson(response.getBody().toString(), Peminjaman.class);
-//        return peminjaman;
-//    }
-//
-//    public Peminjaman updatePeminjaman(Peminjaman peminjaman) {
-//        HttpResponse<JsonNode> response = Unirest.put(URL + "/peminjaman/")
-//                .header("content-type", "application/json")
-//                .body(peminjaman)
-//                .asJson();
-//        Gson gson = new Gson();
-//        Peminjaman p = gson.fromJson(response.getBody().toString(), Peminjaman.class);
-//        return peminjaman;
-//    }
-//
-    public void deletePeminjaman(Long peminjamanId) {
-        Unirest.delete(URL + "/peminjaman/" + peminjamanId).asEmpty();
-    }
-    
-    
-    
-    public Peminjaman getPeminjaman(Long peminjamanId){
-        Peminjaman peminjaman = Unirest.get(URL + "/peminjaman/"+peminjamanId)
-                .asObject(Peminjaman.class)
-                .getBody();
-        return peminjaman;
-    }
-    
 
-    
-    public Peminjaman savePeminjaman(Peminjaman peminjaman){
+
+    public Peminjaman updatePeminjaman(Peminjaman peminjaman) {
+        HttpResponse<JsonNode> response = Unirest.put(URL + "/peminjaman/")
+                .header("content-type", "application/json")
+                .body(peminjaman)
+                .asJson();
+        Gson gson = new Gson();
+        Peminjaman p = gson.fromJson(response.getBody().toString(), Peminjaman.class);
+        return p;
+    }
+
+
+
+    public Peminjaman savePeminjaman(Peminjaman peminjaman) {
         HttpResponse<JsonNode> response = Unirest.post(URL + "/peminjaman/")
                 .header("Content-Type", "application/json")
                 .body(peminjaman)
@@ -82,17 +66,10 @@ public class PeminjamanService {
         Gson gson = new Gson();
         return gson.fromJson(response.getBody().toString(), Peminjaman.class);
     }
-    
-    
-    public Buku updateBuku(Buku buku){
-        HttpResponse<JsonNode> response = Unirest.put(URL + "/buku/")
-                .header("content-type","application/json")
-                .body(buku)
-                .asJson();
-        Gson gson = new Gson();
-        Buku b = gson.fromJson(response.getBody().toString(),Buku.class);
-        return b;
+
+    public void deletePeminjaman(Long peminjamanId) {
+        Unirest.delete(URL + "/peminjaman/" + peminjamanId).asEmpty();
     }
-    
+
 
 }

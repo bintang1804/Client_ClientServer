@@ -6,9 +6,9 @@ package com.bintang.clientbintang.controller;
 
 import com.bintang.clientbintang.FormBuku;
 import com.bintang.clientbintang.FormPeminjaman;
+import com.bintang.clientbintang.model.Anggota;
 import com.bintang.clientbintang.model.Buku;
 import com.bintang.clientbintang.model.Peminjaman;
-import com.bintang.clientbintang.model.ResponseTemplateVO;
 import com.bintang.clientbintang.service.BukuService;
 import com.bintang.clientbintang.service.PeminjamanService;
 import java.util.List;
@@ -48,19 +48,8 @@ public class PeminjamanController {
     }
 
     
-//        public void getPeminjamanId() {
-//        Long id = Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText());
-//        Peminjaman peminjaman = peminjamanService.getPeminjaman(id);
-//        if (peminjaman != null) {
-//            formPeminjaman.getTxtIdPeminjaman().setText(peminjaman.getAnggotaId().toString());
-//            formPeminjaman.getTxtIdBuku().setText(peminjaman.getBukuId().toString());
-//            formPeminjaman.getTxtIdAnggota().setText(peminjaman.getAnggotaId().toString());
-//            formPeminjaman.getTxtTglPinjam().setText(peminjaman.getTglpinjam());
-//            formPeminjaman.getTxtTglKembali().setText(peminjaman.getTglkembali());
-//        } else {
-//            JOptionPane.showMessageDialog(formPeminjaman, "Data Tidak Ditemukan");
-//        }
-//    }
+
+    
     public Peminjaman getPeminjamanId() {
         Long id = Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText());
         Peminjaman peminjaman = peminjamanService.getPeminjaman(id);
@@ -75,21 +64,8 @@ public class PeminjamanController {
         }
         return peminjaman;
     }
-//        public Buku getBukuId() {
-//        Long id = Long.parseLong(formBuku.getTxtIdBuku().getText());
-//        Buku buku = bukuService.getBuku(id);
-//        if (buku != null) {
-//            formBuku.getTxtJudul().setText(buku.getJudul());
-//            formBuku.getTxtPenerbit().setText(buku.getPenerbit());
-//            formBuku.getTxtPengarang().setText(buku.getPengarang());
-//            formBuku.getTxtTahunterbit().setText(buku.getTahun_terbit());
-//
-//        } else {
-//            JOptionPane.showMessageDialog(formBuku, "Data tidak ada");
-//        }
-//        return buku;
-//    }
-    
+
+        
 
     public Peminjaman savePeminjaman() {
         Peminjaman peminjaman = new Peminjaman();
@@ -109,17 +85,6 @@ public class PeminjamanController {
 
     }
     
-    
-
-    
-//      public Buku saveBuku() {
-//        Buku buku = new Buku();
-//        buku.setJudul(formBuku.getTxtJudul().getText());
-//        buku.setPenerbit(formBuku.getTxtPenerbit().getText());
-//        buku.setPengarang(formBuku.getTxtPengarang().getText());
-//        buku.setTahun_terbit(formBuku.getTxtTahunterbit().getText());
-//        return bukuService.saveBuku(buku);
-//    }
       
       
     public void viewTable() {
@@ -145,7 +110,7 @@ public class PeminjamanController {
         peminjaman.setBukuId(Long.parseLong(formPeminjaman.getTxtIdBuku().getText()));
         peminjaman.setTglpinjam(formPeminjaman.getTxtTglPinjam().getText());
         peminjaman.setTglkembali(formPeminjaman.getTxtTglKembali().getText());
-        peminjaman = peminjamanService.savePeminjaman(peminjaman);
+        peminjaman = peminjamanService.updatePeminjaman(peminjaman);
         if (peminjaman != null) {
             formPeminjaman.getTxtIdPeminjaman().setText(peminjaman.getPeminjamanId().toString());
             JOptionPane.showMessageDialog(formPeminjaman, "Update Data Berhasil");
@@ -155,21 +120,7 @@ public class PeminjamanController {
 
     }
     
-//        public void updateBuku() {
-//        Buku buku = new Buku();
-//        buku.setBukuId(Long.parseLong(formBuku.getTxtIdBuku().getText()));
-//        buku.setJudul(formBuku.getTxtJudul().getText());
-//        buku.setPenerbit(formBuku.getTxtPenerbit().getText());
-//        buku.setPengarang(formBuku.getTxtPengarang().getText());
-//        buku.setTahun_terbit(formBuku.getTxtTahunterbit().getText());
-//        buku = bukuService.updateBuku(buku);
-//        if (buku != null) {
-//            formBuku.getTxtIdBuku().setText(buku.getBukuId().toString());
-//            JOptionPane.showMessageDialog(formBuku, "Update Data Berhasil");
-//        } else {
-//            JOptionPane.showMessageDialog(formBuku, "Update Data Gagal");
-//        }
-//    }
+
 
     public void deletePeminjaman() {
         Long id = Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText());
