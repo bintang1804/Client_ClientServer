@@ -22,7 +22,7 @@ import kong.unirest.Unirest;
  */
 public class BukuService {
 
-    private String URL = "http://localhost:9003";
+    private String URL = "http://localhost:9000";
     
     public Buku getBuku(Long bukuId){
         Buku buku = Unirest.get(URL + "/buku/"+bukuId)

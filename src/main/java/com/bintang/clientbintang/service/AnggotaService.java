@@ -20,7 +20,7 @@ import kong.unirest.Unirest;
  */
 public class AnggotaService {
 
-    private String URL = "http://localhost:9027";
+    private String URL = "http://localhost:8000";
     
     public Anggota getAnggota(Long anggotaId){
         Anggota anggota = Unirest.get(URL + "/anggota/"+anggotaId)

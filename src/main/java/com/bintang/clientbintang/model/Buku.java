@@ -10,6 +10,8 @@ package com.bintang.clientbintang.model;
  */
 public class Buku {
 
+    
+    
     private Long bukuId;
     private String judul;
     private String pengarang;

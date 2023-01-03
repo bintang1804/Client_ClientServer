@@ -7,6 +7,7 @@ package com.bintang.clientbintang;
 import com.bintang.clientbintang.controller.AnggotaController;
 import com.bintang.clientbintang.controller.PeminjamanController;
 import com.bintang.clientbintang.model.Anggota;
+import com.bintang.clientbintang.model.Peminjaman;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,7 +28,7 @@ public class FormPeminjaman extends javax.swing.JFrame {
         initComponents();
         controller = new PeminjamanController(this);
         controller.bersihForm();
-        controller.viewTabel();
+        controller.viewTable();
     }
 
     public JTextField getTxtIdAnggota() {
@@ -50,7 +51,9 @@ public class FormPeminjaman extends javax.swing.JFrame {
         return txtTglPinjam;
     }
 
- 
+    public JTable getTabelPeminjaman() {
+        return TabelPeminjaman;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,7 +114,7 @@ public class FormPeminjaman extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Anggota Id", "Buku Id", "Peminjaman Id", "tglpinjam", "tglkembali"
+                "Peminjaman Id", "Anggota Id", "Buku Id", "tglpinjam", "tglkembali"
             }
         ));
         jScrollPane1.setViewportView(TabelPeminjaman);
@@ -255,25 +258,26 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         // TODO add your handling code here:
-        controller.getAnggotaId();
+        controller.getPeminjamanId();
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
-        Anggota anggota
-                = controller.saveAnggota();
-        controller.viewTabel();
+
+// TODO add your handling code here:
+        Peminjaman peminjaman
+                = controller.savePeminjaman();
+        controller.viewTable();
         controller.bersihForm();
 
-        if (anggota != null) {
-            JOptionPane.showMessageDialog(this, "Entri Data Ok");
-        }
+//        if (peminjaman != null) {
+//            JOptionPane.showMessageDialog(this, "Entri Data Ok");
+//        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        controller.updateAnggota();
-        controller.viewTabel();
+        controller.updatePeminjaman();
+        controller.viewTable();
         controller.bersihForm();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -284,8 +288,8 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        controller.deleteP();
-        controller.viewTabel();
+        controller.deletePeminjaman();
+        controller.viewTable();
         controller.bersihForm();
     }//GEN-LAST:event_btnDeleteActionPerformed
 

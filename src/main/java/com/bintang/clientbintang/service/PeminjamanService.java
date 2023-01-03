@@ -5,7 +5,9 @@
 package com.bintang.clientbintang.service;
 
 import com.bintang.clientbintang.model.Buku;
+import com.bintang.clientbintang.model.Peminjaman;
 import com.google.gson.Gson;
+import static com.google.gson.internal.bind.TypeAdapters.URL;
 import java.util.List;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
@@ -18,43 +20,79 @@ import kong.unirest.Unirest;
  */
 public class PeminjamanService {
 
-    private String URL = "http://localhost:9017";
-
-    public Buku getBuku(Long bukuId) {
-        Buku buku = Unirest.get(URL + "/peminjaman/" + bukuId)
-                .asObject(Buku.class)
-                .getBody();
-        return buku;
-    }
-
-    public Buku saveBuku(Buku buku) {
-        HttpResponse<JsonNode> response = Unirest.post(URL + "/buku/")
-                .header("Content-Type", "application/json")
-                .body(buku)
-                .asJson();
-        Gson gson = new Gson();
-        return gson.fromJson(response.getBody().toString(), Buku.class);
-    }
-
-    public List<Buku> getAllBuku() {
-        List<Buku> bukuList = Unirest.get(URL + "/buku/")
-                .asObject(new GenericType<List<Buku>>() {
+    private final String URL = "http://localhost:8050";
+//
+//    public Peminjaman getPeminjaman(Long peminjamanId) {
+//        Peminjaman peminjaman = Unirest.get(URL + "/peminjaman/" + peminjamanId).asObject(Peminjaman.class).getBody();
+//        if (peminjaman != null) {
+//            return peminjaman;
+//        }
+//
+//        return peminjaman;
+//    }
+//
+    public List<Peminjaman> getAllPeminjaman() {
+        List<Peminjaman> peminjamanList = Unirest.get(URL + "/peminjaman/")
+                .asObject(new GenericType<List<Peminjaman>>() {
                 })
                 .getBody();
-        return bukuList;
+        return peminjamanList;
     }
+//
+//    public Peminjaman savePeminjaman(Peminjaman peminjaman) {
+//        HttpResponse<JsonNode> response = Unirest.post(URL + "/peminjaman/")
+//                .header("content-type", "application/json")
+//                .body(peminjaman)
+//                .asJson();
+//        Gson gson = new Gson();
+//        Peminjaman p = gson.fromJson(response.getBody().toString(), Peminjaman.class);
+//        return peminjaman;
+//    }
+//
+//    public Peminjaman updatePeminjaman(Peminjaman peminjaman) {
+//        HttpResponse<JsonNode> response = Unirest.put(URL + "/peminjaman/")
+//                .header("content-type", "application/json")
+//                .body(peminjaman)
+//                .asJson();
+//        Gson gson = new Gson();
+//        Peminjaman p = gson.fromJson(response.getBody().toString(), Peminjaman.class);
+//        return peminjaman;
+//    }
+//
+    public void deletePeminjaman(Long peminjamanId) {
+        Unirest.delete(URL + "/peminjaman/" + peminjamanId).asEmpty();
+    }
+    
+    
+    
+    public Peminjaman getPeminjaman(Long peminjamanId){
+        Peminjaman peminjaman = Unirest.get(URL + "/peminjaman/"+peminjamanId)
+                .asObject(Peminjaman.class)
+                .getBody();
+        return peminjaman;
+    }
+    
 
-    public Buku updateBuku(Buku buku) {
+    
+    public Peminjaman savePeminjaman(Peminjaman peminjaman){
+        HttpResponse<JsonNode> response = Unirest.post(URL + "/peminjaman/")
+                .header("Content-Type", "application/json")
+                .body(peminjaman)
+                .asJson();
+        Gson gson = new Gson();
+        return gson.fromJson(response.getBody().toString(), Peminjaman.class);
+    }
+    
+    
+    public Buku updateBuku(Buku buku){
         HttpResponse<JsonNode> response = Unirest.put(URL + "/buku/")
-                .header("content-type", "application/json")
+                .header("content-type","application/json")
                 .body(buku)
                 .asJson();
         Gson gson = new Gson();
-        Buku b = gson.fromJson(response.getBody().toString(), Buku.class);
+        Buku b = gson.fromJson(response.getBody().toString(),Buku.class);
         return b;
     }
+    
 
-    public void deleteBuku(Long bukuId) {
-        Unirest.delete(URL + "/buku/" + bukuId).asEmpty();
-    }
 }
