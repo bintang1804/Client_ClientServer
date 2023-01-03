@@ -5,33 +5,48 @@
 package com.bintang.clientbintang.controller;
 
 import com.bintang.clientbintang.FormBuku;
-import com.bintang.clientbintang.model.Anggota;
+import com.bintang.clientbintang.FormPeminjaman;
 import com.bintang.clientbintang.model.Buku;
+import com.bintang.clientbintang.model.Peminjaman;
+import com.bintang.clientbintang.model.ResponseTemplateVO;
 import com.bintang.clientbintang.service.BukuService;
+import com.bintang.clientbintang.service.PeminjamanService;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
 
 /**
  *
- * @author bintang
+ * @author Bintang
  */
-public class BukuController {
+@RestController
+@RequestMapping("/peminjaman")
+public class PeminjamanController {
 
-    private BukuService bukuService;
-    private FormBuku formBuku;
+    
+    private PeminjamanService peminjamanService;
+    private FormPeminjaman formPeminjaman;
 
-    public BukuController(FormBuku formBuku) {
-        this.formBuku = formBuku;
-        bukuService = new BukuService();
+    public PeminjamanController(FormPeminjaman formPeminjaman) {
+        this.formPeminjaman = formPeminjaman;
+        peminjamanService = new PeminjamanService();
     }
 
     public void bersihForm() {
-        formBuku.getTxtIdBuku().setText("");
-        formBuku.getTxtJudul().setText("");
-        formBuku.getTxtPenerbit().setText("");
-        formBuku.getTxtPengarang().setText("");
-        formBuku.getTxtTahunterbit().setText("");
+        formPeminjaman.getTxt.setText("");
+        formPeminjaman.getTxtIdAnggota().setText("");
+        formPeminjaman.getTxtIdBuku().setText("");
+        formPeminjaman.getTxtTglPinjam().setText("");
+        formPeminjaman.getTxtTglKembali().setText("");
 
     }
 
@@ -96,4 +111,5 @@ public class BukuController {
             tabelModel.addRow(row);
         }
     }
+
 }
