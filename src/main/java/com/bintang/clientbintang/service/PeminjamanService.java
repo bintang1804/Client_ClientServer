@@ -4,10 +4,8 @@
  */
 package com.bintang.clientbintang.service;
 
-import com.bintang.clientbintang.model.Buku;
 import com.bintang.clientbintang.model.Peminjaman;
 import com.google.gson.Gson;
-import static com.google.gson.internal.bind.TypeAdapters.URL;
 import java.util.List;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
@@ -16,60 +14,48 @@ import kong.unirest.Unirest;
 
 /**
  *
- * @author Bintang
+ * @author Apip
  */
 public class PeminjamanService {
-
-    private final String URL = "http://localhost:8050";
-//
-
-    public Peminjaman getPeminjaman(Long peminjamanId) {
-        Peminjaman peminjaman = Unirest.get(URL + "/peminjaman/" + peminjamanId).
-                asObject(Peminjaman.class).
-                getBody();
-        if (peminjaman != null) {
+   private final String URL = "http://localhost:9050";
+    
+    public Peminjaman getPeminjaman(Long peminjamanId){
+        Peminjaman peminjaman = Unirest.get(URL+"/peminjaman/"+peminjamanId)
+                .asObject(Peminjaman.class).getBody();
+        if (peminjaman!=null){
             return peminjaman;
         }
-
-        return peminjaman;
+        return null;
     }
-
-
     
-
-    public List<Peminjaman> getAllPeminjaman() {
-        List<Peminjaman> peminjamanList = Unirest.get(URL + "/peminjaman/")
-                .asObject(new GenericType<List<Peminjaman>>() {
-                })
+    public List<Peminjaman> getAllPeminjaman(){
+        List<Peminjaman> peminjamanList = Unirest.get(URL+"/peminjaman/")
+                .asObject(new GenericType<List<Peminjaman>>(){})
                 .getBody();
         return peminjamanList;
     }
-
-
-    public Peminjaman updatePeminjaman(Peminjaman peminjaman) {
-        HttpResponse<JsonNode> response = Unirest.put(URL + "/peminjaman/")
-                .header("content-type", "application/json")
-                .body(peminjaman)
-                .asJson();
-        Gson gson = new Gson();
-        Peminjaman p = gson.fromJson(response.getBody().toString(), Peminjaman.class);
-        return p;
-    }
-
-
-
-    public Peminjaman savePeminjaman(Peminjaman peminjaman) {
+    
+    public Peminjaman savePeminjaman(Peminjaman peminjaman){
         HttpResponse<JsonNode> response = Unirest.post(URL + "/peminjaman/")
-                .header("Content-Type", "application/json")
+                .header("content-type","application/json")
                 .body(peminjaman)
                 .asJson();
         Gson gson = new Gson();
-        return gson.fromJson(response.getBody().toString(), Peminjaman.class);
+        Peminjaman a = gson.fromJson(response.getBody().toString(),Peminjaman.class);
+        return a;
     }
-
-    public void deletePeminjaman(Long peminjamanId) {
-        Unirest.delete(URL + "/peminjaman/" + peminjamanId).asEmpty();
+    
+    public Peminjaman updatePeminjaman(Peminjaman peminjaman){
+        HttpResponse<JsonNode> response = Unirest.put(URL+"/peminjaman/")
+                .header("content-type","application/json")
+                .body(peminjaman)
+                .asJson();
+        Gson gson = new Gson();
+        Peminjaman a = gson.fromJson(response.getBody().toString(),Peminjaman.class);
+        return a;
     }
-
-
+    
+    public void deletePeminjaman (Long peminjamanId){
+       Unirest.delete(URL+"/peminjaman/"+peminjamanId).asEmpty();
+    }
 }

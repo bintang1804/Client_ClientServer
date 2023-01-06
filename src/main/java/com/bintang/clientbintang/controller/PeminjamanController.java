@@ -47,25 +47,32 @@ public class PeminjamanController {
         formPeminjaman.getTxtTglKembali().setText("");
     }
 
-    
-
-    
-    public Peminjaman getPeminjamanId() {
-        Long id = Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText());
+//    public Peminjaman getPeminjamanId() {
+//        Long id = Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText());
+//        Peminjaman peminjaman = peminjamanService.getPeminjaman(id);
+//        if (peminjaman != null) {
+////            formPeminjaman.getTxtIdPeminjaman().setText(peminjaman.getAnggotaId().toString());
+//            formPeminjaman.getTxtIdBuku().setText(peminjaman.getBukuId().toString());
+//            formPeminjaman.getTxtIdAnggota().setText(peminjaman.getAnggotaId().toString());
+//            formPeminjaman.getTxtTglPinjam().setText(peminjaman.getTglpinjam());
+//            formPeminjaman.getTxtTglKembali().setText(peminjaman.getTglkembali());
+//        } else {
+//            JOptionPane.showMessageDialog(formPeminjaman, "Data Tidak Ditemukan");
+//        }
+//        return peminjaman;
+//    }
+    public void getPeminjamanId() {
+        Long id = Long.valueOf(formPeminjaman.getTxtIdPeminjaman().getText());
         Peminjaman peminjaman = peminjamanService.getPeminjaman(id);
         if (peminjaman != null) {
-//            formPeminjaman.getTxtIdPeminjaman().setText(peminjaman.getAnggotaId().toString());
-            formPeminjaman.getTxtIdBuku().setText(peminjaman.getBukuId().toString());
             formPeminjaman.getTxtIdAnggota().setText(peminjaman.getAnggotaId().toString());
+            formPeminjaman.getTxtIdBuku().setText(peminjaman.getBukuId().toString());
             formPeminjaman.getTxtTglPinjam().setText(peminjaman.getTglpinjam());
             formPeminjaman.getTxtTglKembali().setText(peminjaman.getTglkembali());
         } else {
-            JOptionPane.showMessageDialog(formPeminjaman, "Data Tidak Ditemukan");
+            JOptionPane.showMessageDialog(formPeminjaman, "Data Tidak Ada");
         }
-        return peminjaman;
     }
-
-        
 
     public Peminjaman savePeminjaman() {
         Peminjaman peminjaman = new Peminjaman();
@@ -84,9 +91,7 @@ public class PeminjamanController {
         return peminjamanService.savePeminjaman(peminjaman);
 
     }
-    
-      
-      
+
     public void viewTable() {
         DefaultTableModel tableModel = (DefaultTableModel) formPeminjaman.getTabelPeminjaman().getModel();
         tableModel.setRowCount(0);
@@ -103,34 +108,39 @@ public class PeminjamanController {
         }
     }
 
+    // public void updatePeminjaman() {
+    //        Peminjaman peminjaman = new Peminjaman();
+    //        peminjaman.setPeminjamanId(Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText()));
+    //        peminjaman.setAnggotaId(Long.parseLong(formPeminjaman.getTxtIdAnggota().getText()));
+    //        peminjaman.setBukuId(Long.parseLong(formPeminjaman.getTxtIdBuku().getText()));
+    //        peminjaman.setTglpinjam(formPeminjaman.getTxtTglPinjam().getText());
+    //        peminjaman.setTglkembali(formPeminjaman.getTxtTglKembali().getText());
+    //        peminjaman = peminjamanService.updatePeminjaman(peminjaman);
+    //        if (peminjaman != null) {
+    //            formPeminjaman.getTxtIdPeminjaman().setText(peminjaman.getPeminjamanId().toString());
+    //            JOptionPane.showMessageDialog(formPeminjaman, "Update Data Berhasil");
+    //        } else {
+    //            JOptionPane.showMessageDialog(formPeminjaman, "Update Data Gagal");
+    //        }
+    //
+    //    }
     public void updatePeminjaman() {
         Peminjaman peminjaman = new Peminjaman();
         peminjaman.setPeminjamanId(Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText()));
-        peminjaman.setAnggotaId(Long.parseLong(formPeminjaman.getTxtIdAnggota().getText()));
-        peminjaman.setBukuId(Long.parseLong(formPeminjaman.getTxtIdBuku().getText()));
         peminjaman.setTglpinjam(formPeminjaman.getTxtTglPinjam().getText());
         peminjaman.setTglkembali(formPeminjaman.getTxtTglKembali().getText());
-        peminjaman = peminjamanService.updatePeminjaman(peminjaman);
         if (peminjaman != null) {
             formPeminjaman.getTxtIdPeminjaman().setText(peminjaman.getPeminjamanId().toString());
             JOptionPane.showMessageDialog(formPeminjaman, "Update Data Berhasil");
         } else {
             JOptionPane.showMessageDialog(formPeminjaman, "Update Data Gagal");
         }
-
     }
-    
-
 
     public void deletePeminjaman() {
         Long id = Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText());
         peminjamanService.deletePeminjaman(id);
         JOptionPane.showMessageDialog(formPeminjaman, "Delete Data Berhasil");
     }
-    
-   
 
-
-
-   
 }
