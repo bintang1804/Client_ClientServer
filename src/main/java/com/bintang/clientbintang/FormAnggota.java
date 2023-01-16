@@ -94,6 +94,9 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(TabelAnggota);
+        if (TabelAnggota.getColumnModel().getColumnCount() > 0) {
+            TabelAnggota.getColumnModel().getColumn(2).setHeaderValue("Alamat");
+        }
 
         btnCari.setText("Cari");
         btnCari.addActionListener(new java.awt.event.ActionListener() {

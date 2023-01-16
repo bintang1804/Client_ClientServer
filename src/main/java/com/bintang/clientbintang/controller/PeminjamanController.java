@@ -108,22 +108,7 @@ public class PeminjamanController {
         }
     }
 
-    // public void updatePeminjaman() {
-    //        Peminjaman peminjaman = new Peminjaman();
-    //        peminjaman.setPeminjamanId(Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText()));
-    //        peminjaman.setAnggotaId(Long.parseLong(formPeminjaman.getTxtIdAnggota().getText()));
-    //        peminjaman.setBukuId(Long.parseLong(formPeminjaman.getTxtIdBuku().getText()));
-    //        peminjaman.setTglpinjam(formPeminjaman.getTxtTglPinjam().getText());
-    //        peminjaman.setTglkembali(formPeminjaman.getTxtTglKembali().getText());
-    //        peminjaman = peminjamanService.updatePeminjaman(peminjaman);
-    //        if (peminjaman != null) {
-    //            formPeminjaman.getTxtIdPeminjaman().setText(peminjaman.getPeminjamanId().toString());
-    //            JOptionPane.showMessageDialog(formPeminjaman, "Update Data Berhasil");
-    //        } else {
-    //            JOptionPane.showMessageDialog(formPeminjaman, "Update Data Gagal");
-    //        }
-    //
-    //    }
+   
     public void updatePeminjaman() {
         Peminjaman peminjaman = new Peminjaman();
         peminjaman.setPeminjamanId(Long.parseLong(formPeminjaman.getTxtIdPeminjaman().getText()));

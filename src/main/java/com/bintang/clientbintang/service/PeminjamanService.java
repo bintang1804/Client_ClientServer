@@ -14,10 +14,10 @@ import kong.unirest.Unirest;
 
 /**
  *
- * @author Apip
+ * @author Bintang
  */
 public class PeminjamanService {
-   private final String URL = "http://localhost:9050";
+   private final String URL = "http://localhost:8050";
     
     public Peminjaman getPeminjaman(Long peminjamanId){
         Peminjaman peminjaman = Unirest.get(URL+"/peminjaman/"+peminjamanId)
