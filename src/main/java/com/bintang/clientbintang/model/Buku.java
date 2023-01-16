@@ -6,7 +6,7 @@ package com.bintang.clientbintang.model;
 
 /**
  *
- * @author bintang
+ * @author Bintang
  */
 public class Buku {
 

@@ -18,7 +18,7 @@ import kong.unirest.Unirest;
 
 /**
  *
- * @author bintang
+ * @author Bintang
  */
 public class BukuService {
 

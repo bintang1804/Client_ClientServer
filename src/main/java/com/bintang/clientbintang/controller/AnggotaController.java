@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author bintang
+ * @author Bintang
  */
 public class AnggotaController {
 
